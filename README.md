@@ -1166,7 +1166,7 @@ public class Practice1 {
 	}
 
 }
-x: 20, y : 30
+// x: 20, y : 30
 ```
 
 <br>
@@ -1965,6 +1965,8 @@ public class Practice1 {
 # 객체지향의 활용
 
 ### 예시
+
+**게임 캐릭터 공격 프로그램**
 
 ✔️ `instanceof`
 
