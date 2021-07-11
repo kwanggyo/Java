@@ -1,4 +1,7 @@
 # Java Study
+
+- 유튜브의 동빈나 - 자바 기초 프로그래밍 강좌
+
 # `07.07`
 
 ✅ 자바는 모든 것이 `클래스 기반에서 동작`해야 한다는 특징을 가진다.
@@ -932,3 +935,1116 @@ public class Practice2 {
 // 피보나치 수열의 10번째 원소는 55입니다.
 ```
 
+<br>
+
+# `07.11`
+
+# 배열
+
+여러가지 원소가 연속적으로 나열될 수 있고 이것을 처리하는 방법
+
+데이터가 많을 때 효과적으로 처리한다.
+
+### 배열 문법
+
+```java
+int [] array = new int[100] // 100은 크기
+```
+
+import를 해주는 이유?
+
+→ 기본적으로 자바가 모든 라이브러리를 가지고 있으면 무거워지기 때문에 필요할 때 import한다.
+
+### 예시
+
+**원하는 개수만큼의 배열 생성 및 최댓값 구하기**
+
+```java
+import java.util.Scanner;
+
+public class Practice1 {
+	
+	public static int max(int a, int b) {
+		return (a > b) ? a : b;
+	}
+
+	public static void main(String[] args) {
+		
+		// 원하는 개수만큼의 배열 생성 및 최댓값 구하기
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("생성할 배열의 크기를 입력하세요 : ");
+		int number = scanner.nextInt();
+		int [] array = new int[number];
+		for(int i = 0; i < number; i++)
+		{
+			System.out.print("배열에 입력할 정수를 하나씩 입력하세요 : ");
+			array[i] = scanner.nextInt();
+		}
+		int result = -1;
+		for(int i = 0; i < number; i++)
+		{
+			result = max(result, array[i]);
+		}
+		System.out.println("입력한 정수들 중에서 가장 큰 값은 " + result + "입니다.");
+	}
+
+}
+// 생성할 배열의 크기를 입력하세요 : 5
+// 배열에 입력할 정수를 하나씩 입력하세요 : 2
+// 배열에 입력할 정수를 하나씩 입력하세요 : 3
+// 배열에 입력할 정수를 하나씩 입력하세요 : 5
+// 배열에 입력할 정수를 하나씩 입력하세요 : 1
+// 배열에 입력할 정수를 하나씩 입력하세요 : 4
+// 입력한 정수들 중에서 가장 큰 값은 5입니다.
+```
+
+**100개의 랜덤 정수의 평균을 구하는 프로그램**
+
+✔️ `Math.random()`
+
+: 0 ≤ x < 1 사이의 수를 랜덤으로 뽑아온다. ex) 0.123
+
+→ 이를 1 ≤ x < 101로 만들기 위해서는 Math.random() * 100 + 1로 해준다.
+
+```java
+public class Practice2 {
+
+	public static void main(String[] args) {
+		
+		// 100개의 랜덤 정수의 평균을 구하는 프로그램
+		int [] array = new int[100];
+		for(int i = 0; i < 100; i++)
+		{
+			array[i] = (int) (Math.random() * 100 + 1);
+		}
+		int sum = 0;
+		for(int i = 0; i < 100; i++)
+		{
+			sum += array[i];
+		}
+		System.out.println("100개의 랜덤 정수의 평균 값은 " + sum / 100 + "입니다.");
+	}
+
+}
+// 100개의 랜덤 정수의 평균 값은 50입니다.
+```
+
+<br>
+
+# 다차원 배열
+
+배열이 배열의 원소로 들어가는 구조
+
+### 예시
+
+**10x10의 정수 랜덤 데이터를 생성해서 다차원 배열로 표현**
+
+```java
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// 5x5의 정수 랜덤 데이터를 생성해서 다차원 배열로 표현
+		int N = 5;
+		int [][] array = new int[N][N];
+		for(int i = 0; i < N; i++)
+		{
+			for(int j = 0; j < N; j++)
+			{
+				array[i][j] = (int)(Math.random() * 10);
+			}
+		}
+		System.out.println(array);	// 파이썬과 다름 -> 출력값 [[I@1175e2db(이 값은 바뀌지 않음)
+		for(int i = 0; i < N; i++)
+		{
+			for(int j = 0; j < N; j++)
+			{
+				System.out.print(array[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+}
+// [[I@1175e2db
+// 8 0 1 2 8 
+// 0 9 8 0 5 
+// 6 4 1 0 0 
+// 8 4 0 1 2 
+// 0 5 6 4 4
+```
+
+<br>
+
+# 클래스
+
+객체(실세계의 사물)지향의 특징으로 가장 기본이 되는 것으로 현실 세계의 특정한 물건을 지칭할 수 있다.
+
+대표적으로 많이 사용되는 것이 Node 클래스
+
+→ 하나의 장소나 위치를 의미할 수 있으며, 자료구조에서 말하는 이진 탐색 트리의 하나의 서브 트리가 될 수 있다.
+
+하나의 처리할 데이터 단위를 명시할 때 사용
+
+- Car 클래스(new Car();)
+  - 속력, 색상, 이름 등
+
+✔️ 어떠한 데이터를 변수로 만들어서 사용하는 것 : 인스턴스화
+
+✔️ 모듈화, 보안적, 인스턴스 사용
+
+- 각각의 기능을 나누어서 다루고 메인에서는 간략하게 다룰 수 있다.
+
+### 예시
+
+**하나의 점을 의미하는 Node 클래스 생성하고 Node 클래스를 이용하여 두 점 사이의 중점을 구하는 프로그램**
+
+✔️ `getX()`나 `setX()`
+
+: x의 값을 가져오거나 설정 가능 -> 기본적인 보안
+
+✔️ `private`
+
+: 외부에서 함부로 접근할 수 없는 형태(외부에서 함부로 바꿀 수 없음)
+
+✔️ `public int getX()`
+
+: x, y의 값을 가져가기 위해서 외부에서 접근할 수 있게 public으로 만들어준다.
+
+✔️ `public void setX(int x)`
+
+: x의 값을 설정하기 위해서
+
+✔️ `this.x = x;`
+
+: 자신이 가지고 있는 고유한 x의 속성을 바꿔줌, 매개변수로 넘어오는 x를 private x에 넣어주는 것
+
+```java
+public class Node {
+	
+	// getX나 setX를 통해 x의 값을 가져오거나 설정가능 -> 기본적인 보안
+	private int x;	// private -> 외부에서 함부로 접근할 수 없는 형태(외부에서 함부로 바꿀 수 없음)
+	private int y;
+	
+	public int getX() {	// x, y의 값을 가져가기 위해서 외부에서 접근할 수 있게 public으로 만들어줌
+		return x; // 가지고 있는 x를 반환
+	}
+	
+	public void setX(int x) {	// x의 값을 설정하기 위해서
+		this.x = x;	// 자신이 가지고 있는 고유한 x의 속성을 바꿔줌, 매개변수로 넘어오는 x를 private x에 넣어주는 것
+	}
+	
+	public int getY() {	
+		return y;
+	}
+	
+	public void setY(int y) {	
+		this.y = y;
+	}
+	
+	// 생성자 : 인스턴스를 만들어줄 때 자동으로 값을 초기화 해주는 함수, 클래스랑 동일한 이름을 가진다.
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public Node getCenter(Node other) {	// 다른 노드를 매개변수로 받고 비교를 해서 정중앙의 좌표를 반환해줌
+		return new Node((this.x + other.getX()) / 2, (this.y + other.getY()) / 2);
+	}
+
+}
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// 하나의 점을 의미하는 Node 클래스 생성
+		// Node 클래스를 이용하여 두 점 사이의 중점을 구하는 프로그램
+		Node one = new Node(10, 20);
+		Node two = new Node(30, 40);
+		Node result = one.getCenter(two);
+		System.out.println("x: " + result.getX() + ", y : " + result.getY());
+	}
+
+}
+x: 20, y : 30
+```
+
+<br>
+
+# 상속
+
+불필요한 코드의 수를 줄일 수 있어 효율적인 개발이 가능하다.
+
+✔️ 기본적으로 클래스에서 접근하고 초기값을 넣어 줄 수 있다.
+
+- 마우스 우클릭 → Source → Generate Getters and Setters...
+- 마우스 우클릭 → Source → Generate Constructor using fields...
+
+✔️ `super()`
+
+: 자신의 부모 클래스의 생성자를 사용하겠다는 의미
+
+✔️ public class Student `extends Person`
+
+: Person 클래스를 상속 받음
+
+### 예시
+
+**Person 클래스 생성**
+
+**→ Person을 상속받은 Student 클래스 → Student 클래스를 이용한 객체 생성**
+
+```java
+public class Person {
+
+	private String name;
+	private int age;
+	private int height;
+	private int weight;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+	
+	public Person(String name, int age, int height, int weight) {
+		super();	// 자신의 부모 클래스의 생성자를 사용하겠다는 의미
+		this.name = name;
+		this.age = age;
+		this.height = height;
+		this.weight = weight;
+	}
+	
+	
+}
+public class Student extends Person{	// 상속
+
+	private String studentID;
+	private int grade;
+	private double GPA; // 외국식 학점 표현
+	
+	public String getStudentID() {
+		return studentID;
+	}
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public double getGPA() {
+		return GPA;
+	}
+	public void setGPA(double gPA) {
+		GPA = gPA;
+	}
+	
+	public Student(String name, int age, int height, int weight, String studentID, int grade, double gPA) {
+		super(name, age, height, weight);	// 자신의 부모가 가지고 있는 생성자를 실행
+		this.studentID = studentID;
+		this.grade = grade;
+		GPA = gPA;
+	} 
+	
+	public void show() {
+		System.out.println("-------------------------------");
+		System.out.println("학생 이름 : " + getName());
+		System.out.println("학생 나이 : " + getAge());
+		System.out.println("학생 키 : " + getHeight());
+		System.out.println("학생 몸무게 : " + getWeight());
+		System.out.println("학생 학번 : " + getStudentID());
+		System.out.println("학생 학년 : " + getGrade());
+		System.out.println("학생 학점 : " + getGPA());
+		
+	}
+	
+}
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// Person 클래스 생성
+		// Person을 상속받은 Student 클래스
+		// Student 클래스를 이용한 객체 생성
+		Student student1 = new Student("홍길동", 20, 180, 70, "20210711", 1, 4.5);
+		Student student2 = new Student("길동홍", 21, 181, 71, "20210712", 1, 4.0);
+		student1.show();
+		student2.show();
+
+	}
+
+}
+// -------------------------------
+// 학생 이름 : 홍길동
+// 학생 나이 : 20
+// 학생 키 : 180
+// 학생 몸무게 : 70
+// 학생 학번 : 20210711
+// 학생 학년 : 1
+// 학생 학점 : 4.5
+// -------------------------------
+// 학생 이름 : 길동홍
+// 학생 나이 : 21
+// 학생 키 : 181
+// 학생 몸무게 : 71
+// 학생 학번 : 20210712
+// 학생 학년 : 1
+// 학생 학점 : 4.0
+```
+
+**→ Person을 상속받은 Teacher 클래스 → Teacher 클래스를 이용한 객체 생성**
+
+```java
+public class Teacher extends Person{
+
+	private String teacherID;
+	private int monthSalary;
+	private int workedYear;
+	
+	// 변수 접근 가능하게
+	public String getTeacherID() {
+		return teacherID;
+	}
+	public void setTeacherID(String teacherID) {
+		this.teacherID = teacherID;
+	}
+	public int getMonthSalary() {
+		return monthSalary;
+	}
+	public void setMonthSalary(int monthSalary) {
+		this.monthSalary = monthSalary;
+	}
+	public int getWorkedYear() {
+		return workedYear;
+	}
+	public void setWorkedYear(int workedYear) {
+		this.workedYear = workedYear;
+	}
+	// 생성자
+	public Teacher(String name, int age, int height, int weight, String teacherID, int monthSalary, int workedYear) {
+		super(name, age, height, weight);
+		this.teacherID = teacherID;
+		this.monthSalary = monthSalary;
+		this.workedYear = workedYear;
+	}
+	
+	public void show() {
+		System.out.println("--------------------------");
+		System.out.println("교사 이름 : " + getName());
+		System.out.println("교사 나이 : " + getAge());
+		System.out.println("교사 키 : " + getHeight());
+		System.out.println("교사 몸무게 : " + getWeight());
+		System.out.println("교직원 번호  : " + getTeacherID());
+		System.out.println("교사 월급 : " + getMonthSalary());
+		System.out.println("교사 연치 : " + getWorkedYear());
+		
+	}
+	
+}
+```
+
+**학생 정보를 입력받아 배열에 넣어주기**
+
+```java
+import java.util.Scanner;
+
+public class Practice2 {
+
+	public static void main(String[] args) {
+		
+		// 사용자로부터 입력을 받아서 출력
+		Scanner scan = new Scanner(System.in);
+		System.out.print("총 몇 명의 학생이 존재합니까? ");
+		int number = scan.nextInt();
+		Student[] students = new Student[number];
+		for(int i = 0; i < number; i++)
+		{
+			String name;
+			int age;
+			int height; 
+			int weight;
+			String studentID;
+			int grade;
+			double gPA;
+			System.out.print("학생의 이름을 입력하세요 : ");
+			name = scan.next();
+			System.out.print("학생의 나이을 입력하세요 : ");
+			age = scan.nextInt();
+			System.out.print("학생의 키을 입력하세요 : ");
+			height = scan.nextInt();
+			System.out.print("학생의 몸무게을 입력하세요 : ");
+			weight = scan.nextInt();
+			System.out.print("학생의 학번을 입력하세요 : ");
+			studentID = scan.next();
+			System.out.print("학생의 학년을 입력하세요 : ");
+			grade = scan.nextInt();
+			System.out.print("학생의 학점을 입력하세요 : ");
+			gPA = scan.nextDouble();
+			students[i] = new Student(name, age, height, weight, studentID, grade, gPA);
+		}
+		for(int i = 0; i < number; i++)
+		{
+			students[i].show();
+		}
+	}
+
+}
+```
+
+<br>
+
+# 추상(Abstract)
+
+개발 자체 안정성과 확장 가능성을 보장 받는다.
+
+일종의 미완성인 클래스 → 설계적인 틀을 갖추고 클래스를 작성할 수 있게 한다.
+
+직접적으로 객체 인스턴스를 생성할 수 없지만 새로운 클래스를 생성하는데 밑바탕이 되는 역할
+
+ex) 도형은 사각형, 원, 삼각형이 이지만 공통적으로 넓이를 가진다. 여기서 넓이를 구현하는 것 !
+
+✔️ 추상 클래스를 사용하려면 꼭 상속을 받아야 하며 상속 받은 모든 추상 메소드는 반드시 구현을 해주어야 한다.
+
+✔️ 개발에 필요한 요소를 미리 설계할 수 있다 !
+
+### 예시
+
+**추상의 개념을 이용하여 음악 플레이어 클래스를 구현**
+
+✔️ abstract : 추상 클래스를 정의
+
+```java
+abstract class Player {	// abstract : 추상 클래스를 정의
+	
+	abstract void play(String songName);
+	abstract void pause();	// 일시 정지
+	abstract void stop();	// 하나의 곡을 정지
+
+}
+```
+
+✔️ 상속 받기 위해 public class Practice extends Player를 작성하면 오류가 뜬다.
+
+✔️ Add unimplemented methods를 통해 아직 구현이 안된 것들을 구현을 해준다.
+
+→ 반드시 상속을 받아서 구현을 해줘야 한다.
+
+✔️ `Practice1 main = new Practice1();`
+
+: 메인 메소드는 메인(Practice1) 클래스 안에서 공유하는 스태틱으로 선언된 하나의 메소드이다. 스태틱으로 선언된 메소드 안에서 불러오는 메소드는 스태틱으로 선언되어야 한다. 그렇기 때문에 이렇게 하지 않고 메인(Practice1) 클래스의 main 인스턴스를 만들고 여기서 플레이 해준다.
+
+✔️ `@Override`
+
+: 반드시 구현해야하는 요소를 알려준다. → 설계적인 측면에서 의미, 어떤 함수를 만들어야 하는지 고민하는 시간을 줄임
+
+✔️
+
+```java
+public class Practice1 extends Player{
+
+	public static void main(String[] args) {
+		
+		// 추상의 개념을 이용하여 음악 플레이어 클래스를 구현
+		Practice1 main = new Practice1();	// 메인 메소드는 메인(Practice1) 클래스 안에서 공유하는 스태틱으로 선언된 하나의 메소드
+								// 스태틱으로 선언된 메소드 안에서 불러오는 메소드는 스태틱으로 선언되어야 함
+								// 그렇기 때문에 이렇게 하지 않고 메인(Practice1) 클래스의 main 인스턴스를 만들고 여기서 플레이 해준다
+		main.play("Coldplay - Viva La Vida");
+		main.pause();
+		main.stop();
+
+	}
+
+	@Override	// 반드시 구현해야하는 요소를 알려준다. -> 설계적인 측면에서 의미, 어떤 함수를 만들어야 하는지 고민하는 시간을 줄임
+	void play(String songName) {
+		
+		System.out.println(songName + " 곡을 재생합니다.");
+		
+	}
+
+	@Override
+	void pause() {
+		
+		System.out.println("곡을 일시정지합니다.");
+		
+	}
+
+	@Override
+	void stop() {
+		
+		System.out.println("곡을 정지합니다.");
+		
+	}
+
+}
+```
+
+**추상의 개념을 이용하여 동물 클래스를 구현**
+
+✔️ `abstract void crying();`
+
+: 반드시 구현해야 한다는 것을 알려준다!
+
+```java
+abstract class Animal {
+
+	abstract void crying();	// 반드시 구현해야 한다는 것을 알려줌 !
+}
+public class Dog extends Animal {
+
+	@Override
+	void crying() {
+		
+		System.out.println("월! 월!");
+		
+	}
+	
+}
+public class Cat extends Animal {
+
+	@Override
+	void crying() {
+		
+		System.out.println("야옹");
+		
+	}
+	
+}
+public class Practice2 {
+
+	public static void main(String[] args) {
+		
+		// 추상의 개념을 이용하여 동물 클래스를 구현
+		Dog dog = new Dog();
+		Cat cat = new Cat();
+		dog.crying();
+		cat.crying();
+		
+	}
+
+}
+```
+
+<br>
+
+# 최종(Final)
+
+절대로 변하지 않는 특정한 것을 정하고 싶을 때 사용한다.
+
+변화하지 않고 보호하기 위해 사용한다.
+
+✔️ 변수, 메소드, 클래스에 모두 사용할 수 있다.
+
+- 변수 : 변하지 않는 상수(Stop Value Change)
+- 메소드 : 재정의가 불가능한 메소드(Stop Method Overridding)
+- 클래스 : 상속이 불가능한 하나의 완전한 클래스(Stop Inheritance)
+
+### 예시
+
+**Final 키워드를 사용한 변수**
+
+```java
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// Final 키워드를 사용한 변수
+		final int number = 10;
+		// number = 5; // 에러
+		System.out.println(number);
+
+	}
+
+}
+```
+
+**Final 키워드를 사용한 함수**
+
+✔️ `public void show() {}`
+
+: 자기 클래스에서 재정의(overridding) -> final이 붙으면 재정의가 불가능해진다.
+
+```java
+public class Parent {
+	
+	public final void show() {
+		System.out.println("Hi");
+	}
+
+}
+public class Practice2 extends Parent {
+	
+//	public void show() {	// 자기 클래스에서 재정의(overridding) -> final이 붙으면 재정의가 불가능해짐
+//		System.out.println("Hello");
+//	}
+
+	public static void main(String[] args) {
+		
+		// Final 키워드를 사용한 함수
+		Practice2 main = new Practice2();
+		main.show();
+
+	}
+
+}
+```
+
+**Final 키워드를 사용한 클래스**
+
+```java
+final class Parent2 {
+
+	public final void show() {
+		System.out.println("Hi");
+	}
+}
+```
+
+아래의 class는 사용할 수 없다. 사용하기 위해서는 extends Parent2를 지워야 한다.
+
+```java
+public class Practice3 extends Parent2{	// 에러 발생 -> final 클래스 상속 불가
+
+	public static void main(String[] args) {
+		
+		// Final 키워드를 사용한 클래스
+		Main main = new Main();
+		main.show();
+
+	}
+
+}
+```
+
+<br>
+
+# 인터페이스(Interface)
+
+추상 클래스보다 더 추상적인, 더 설계에 가까운 구현 방법 → 일반적으로 추상 크래스보다 인터페이스를 많이 사용한다.
+
+→ 조금 더 설계의 측면에서 체계적으로 작성 가능하다!
+
+다중 상속을 구현하게 해준다.(기본적으로는 안된다.)
+
+✔️ 추상 클래스와 다른 점
+
+- 추상 클래스 : 추상 메소드 외에 멤버 변수나 일반 메소드를 가질 수 있다.
+- 인터페이스 : 반드시 사전에 정의된 추상 메소드와 상수만을 가질 수 있다.(추상화의 정도가 높다. → 미리 구현하면 안되고 설계만 한다!)
+
+인터페이스는 팀 프로젝트의 동시 작업에 유리하고 일반적으로 추상보다 요구되는 설계의 기준이 높다. → 더 체계적이다.
+
+### 예시
+
+**인터페이스 선언과 메소드 다루기**
+
+✔️ 아래와 같이 작성하게 되면 오류가 발생한다. → 미리 어떠한 일반 메소드를 가지지 못한다.
+
+```java
+public interface Dog {
+
+	abstract void crying();
+	public void show() {	// 미리 어떠한 일반 메소드를 못가지게 한다 -> 설계만 가능
+							// public interface -> abstract class로 바꾸면 사용 가능
+							// 추상 클래스보다 추상화의 정도가 높다.
+		System.out.println("Hello World!");
+	}
+}
+```
+
+✔️ 정상 동작을 위해 바꿔준다.
+
+✔️ `implements` 를 통해서 가져온다.
+
+```java
+public interface Dog {
+
+	abstract void crying();
+	public void show();
+
+}
+public class Practice1 implements Dog {
+
+	public static void main(String[] args) {
+		
+		// 인터페이스 선언과 메소드 다루기
+		Practice1 main = new Practice1();
+		main.crying();
+		main.show();
+	}
+
+	@Override
+	public void crying() {
+		
+		System.out.println("월! 월!");
+		
+	}
+
+	@Override
+	public void show() {
+		
+		System.out.println("Hello World!");
+		
+	}
+
+}
+// 월! 월!
+// Hello World!
+```
+
+**인터페이스를 통한 다중 상속**
+
+✔️ 추상 클래스로는 다중 상속이 불가능하지만 인터페이스를 사용하면 가능하다.
+
+✔️ `public void show();`
+
+: 추상 클래스에서 public 변수가 들어가면 반드시 몸체를 구현해야 한다.
+
+```java
+public interface Dog2 {
+
+	abstract void crying(); 
+	// public void show();	// 추상클래스에서 public 변수가 들어가면 반드시 몸체를 구현해야 한다.
+	public void one();
+	
+}
+public interface Cat {
+
+	abstract void crying();
+	public void two();
+	
+}
+```
+
+✔️ @Override부분에서 겹치는 부분은 하나만 정의해줘도 된다.
+
+```java
+public class Practice2 implements Dog2, Cat {
+
+	public static void main(String[] args) {
+		
+		// 인터페이스 다중 상속
+		Practice2 main = new Practice2();
+		main.crying();
+		main.one();
+		main.two();
+		
+	}
+
+	@Override
+	public void crying() {	// 겹치는 부분은 하나만 정의해줘도 된다.
+		
+		System.out.println("월! 월!");
+		
+	}
+
+	@Override
+	public void two() {
+		
+		System.out.println("two");
+		
+	}
+
+	@Override
+	public void one() {
+		
+		System.out.println("one");
+		
+	}
+
+}
+```
+
+<br>
+
+# 다형성(Polymorphism)
+
+다양한 형태의 성질을 가진다는 의미
+
+사용하는 변수 형태를 바꾸어 여러 타입의 객체를 참조할 수 있다. → 소스 코드의 유연성
+
+✔️ 부모 클래스 타입의 참조 변수로 하위 클래스의 객체를 참조할 수 있다.
+
+### 예시
+
+**과일 정보 프로그램**
+
+✔️ `Fruit fruit = new Peach();`
+
+: 자식 클래스의 인스턴스를 자신의 인스턴스 변수로 넣을 수 있다.
+
+✔️ 다형성이 존재하는 이유
+
+: 실제로 구현할 때는 바나나인지 복숭아 인지 사용자가 선택할 수 있게 해준다!
+
+```java
+public class Fruit {
+
+	String name;
+	int price;
+	int fresh;
+	
+	public void show() {
+		System.out.println("이름 : " + name);
+		System.out.println("가격 : " + price);
+		System.out.println("신선도 : " + fresh);
+	}
+}
+public class Peach extends Fruit {
+	
+	public Peach() {
+		price = 1500;
+		name = "복숭아";
+		fresh = 75;
+//		// 주석 처리하면 -> 변수를 초기화 시켜줘야 정상적으로 사용 가능
+//		이름 : null
+//		가격 : 0
+//		신선도 : 0
+	}
+}
+public class Banana extends Fruit {
+	
+	public Banana() {
+		
+		price = 1000;
+		name = "바나나";
+		fresh = 80;
+	}
+
+}
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// 과일 정보 프로젝트
+		Fruit fruit = new Peach();	// 자식 클래스의 인스턴스를 자기 자신의 변수로 넣을 수 있다.
+		fruit.show();
+		Fruit fruit2 = new Banana();	// 다형성이 존재하는 이유 :실제로 구현할 때는 바나나인지 복숭아 인지 사용자가 선택할 수 있게 해준다!
+										// 자식 클래스의 인스턴스 변수를 자신의 인스턴스 변수로 넣어줄 수 있다.
+		fruit2.show();
+
+	}
+
+}
+```
+
+**과일 정보 → 사용자 입력 받기 ⇒ 많이 활용된다.**
+
+✔️ 사용자의 입력을 받아서 출력하는 예시
+
+게임 캐릭터라고 생각하면
+
+- 부모: 게임 캐릭터
+- 자식 : 전사, 마법사 등
+
+→ 사용자가 입력한 값에 따라 인스턴스 변수를 쉽게 바꿀 수 있다.
+
+```java
+import java.util.Scanner;
+
+public class Practice2 {
+
+	public static void main(String[] args) {
+		
+		// 사용자의 입력을 받아서 출력
+		// ex) 게임 캐릭터라고 생각하면 부모: 게임 캐릭터, 자식 : 전사, 마법사 등 -> 사용자가 입력한 값에 따라 인스턴스 변수를 쉽게 바꿀 수 있다.
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("바나나 : 1, 복숭아 : 2 ? ");
+		int input = scanner.nextInt();
+		Fruit fruit;
+		if(input == 1)
+		{
+			fruit = new Banana();
+			fruit.show();
+		}
+		else if(input == 2)
+		{
+			fruit = new Peach();
+			fruit.show();
+		}
+	}
+
+}
+```
+
+<br>
+
+# 객체(Object) 클래스
+
+Object라는 클래스가 존재한다.(여기서는 객체지향의 객체가 아님)
+
+많이 사용되지는 않는다.
+
+기본적으로 모든 객체의 조상 역할을 한다.
+
+존재 이유 : 모든 클래스가 공통으로 포함하고 있어햐 하는 기능을 제공하기 위해
+
+![image-20210711225427075](README.assets/image-20210711225427075.png)
+
+### 예시
+
+**객체를 비교하는 방법(다형성 이용) - 두 가지 인스턴스 비교**
+
+✔️ `public class Archer`
+
+: extends Object를 명시해주지 않아도 상속 받고 있다.
+
+✔️ `Archer temp = (Archer) obj;`
+
+: Object를 Archer 형태로 바꿔준다.
+
+→ 바꿀 수 있는 이유는 object가 Archer의 부모 클래스이기 때문에(다형성) 가능하다.
+
+✔️ `System.out.println(archer1.equals(archer2));`
+
+: 내부적인 값을 비교하는 방법! 알아두기!
+
+```java
+public class Archer {	// extends Object를 명시해주지 않아도 가능
+
+	String name;
+	String power;
+	
+	// 생성자
+	public Archer(String name, String power) {
+		this.name = name;
+		this.power = power;
+	}
+	
+	// obj가 Archer 클래스의 인스턴스와 동일한지 비교
+	public boolean equals(Object obj) {	// 매개변수로 Object가 들어옴
+		Archer temp = (Archer) obj;	// Object를 Archer 형태로 바꿔줌
+									// 바꿀 수 있는 이유는 object가 Archer의 부모 클래스이기 때문에(다형성)
+		if(name == temp.name && power == temp.power) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// 객체를 비교하는 방법
+		Archer archer1 = new Archer("궁수1", "상");
+		Archer archer2 = new Archer("궁수1", "상");
+		System.out.println(archer1 == archer2);	// 두 개의 인스턴스가 내부적인 값은 같지만 그대로 비교하게되면 다르기 때문에(1, 2) false
+		System.out.println(archer1.equals(archer2)); // 내부적인 값을 비교
+
+	}
+
+}
+```
+
+<br>
+
+# 객체지향의 활용
+
+### 예시
+
+✔️ `instanceof`
+
+: 해당 클래스의 인스턴스인지 확인
+
+```java
+public class Hero {
+	
+	String name;
+	
+	public Hero(String name) {
+		this.name = name;
+	}
+	
+	public void attack() {
+		System.out.println("주먹 지르기!");
+	}
+}
+public class Warrior extends Hero{
+
+	public Warrior(String name) {
+		super(name);
+	}
+	
+	public void groundCutting() {
+		System.out.println("대지 가르기!");
+	}
+
+}
+public class Archer extends Hero {
+
+	public Archer(String name) {
+		super(name);
+	}
+	
+	public void fireArrow() {
+		System.out.println("불화살!");
+	}
+
+}
+public class Wizard extends Hero {
+
+	public Wizard(String name) {
+		super(name);
+	}
+	
+	public void freezing() {
+		System.out.println("얼리기!");
+	}
+
+}
+public class Practice1 {
+
+	public static void main(String[] args) {
+		
+		// 게임 캐릭터 공격 프로그램
+		Hero[] heros = new Hero[3];
+		// 다형성 기법 이용
+		heros[0] = new Warrior("전사");
+		heros[1] = new Archer("궁수");
+		heros[2] = new Wizard("마법사");
+		
+		for(int i = 0; i < heros.length; i++)
+		{
+			heros[i].attack();
+			
+			if(heros[i] instanceof Warrior) {	// 해당 클래스의 인스턴스인지 확인
+				Warrior temp = (Warrior) heros[i];
+				temp.groundCutting();
+			}
+			else if(heros[i] instanceof Archer) {
+				Archer temp = (Archer) heros[i];
+				temp.fireArrow();
+			}
+			else if(heros[i] instanceof Wizard) {
+				Wizard temp = (Wizard) heros[i];
+				temp.freezing();
+			}
+		}
+	}
+
+}
+```
